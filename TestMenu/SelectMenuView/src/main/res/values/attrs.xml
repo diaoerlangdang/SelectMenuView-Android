@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="menuAttrs">
+
+        <!--文字大小-->
+        <attr name="normalTextSize" format="dimension" />
+        <attr name="selectTextSize" format="dimension" />
+
+        <!--文字颜色-->
+        <attr name="normalTextColor" format="color" />
+        <attr name="selectTextColor" format="color" />
+
+        <!--背景颜色-->
+        <attr name="normalBgColor" format="color" />
+        <attr name="selectBgColor" format="color" />
+
+        <!--分割线颜色-->
+        <attr name="separateLineColor" format="color" />
+
+        <!--分割线左侧边距-->
+        <attr name="separateLineMarginLeft" format="dimension" />
+
+        <!--分隔线右侧边距-->
+        <attr name="separateLineMarginRight" format="dimension" />
+
+    </declare-styleable>
+</resources>
