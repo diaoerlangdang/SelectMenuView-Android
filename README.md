@@ -46,4 +46,10 @@ void onMenuViewSelect(SelectMenuView menuView, int section, int row);
  * @param selectIndexs 选中的位置
  */
 void onMenuViewFinish(SelectMenuView menuView, List<Integer> selectIndexs);
+
+/**
+ * 菜单完成
+ * @param menuView 菜单
+ */
+void onMenuViewCancel(SelectMenuView menuView);
 ```

@@ -70,6 +70,12 @@ public class SelectMenuView extends LinearLayout {
          */
         void onMenuViewFinish(SelectMenuView menuView, List<Integer> selectIndexs);
 
+        /**
+         * 菜单完成
+         * @param menuView 菜单
+         */
+        void onMenuViewCancel(SelectMenuView menuView);
+
     }
 
     //默认文字颜色
@@ -309,6 +315,18 @@ public class SelectMenuView extends LinearLayout {
      */
     public void hideMenu()
     {
+        hideMenu(false);
+    }
+
+    public void hideMenu(boolean isFinish)
+    {
+        if (isFinish) {
+            mDelegate.onMenuViewFinish(this, mSelectIndexs);
+        }
+        else {
+            mDelegate.onMenuViewCancel(this);
+        }
+
         Animation translateAnimation = new TranslateAnimation(Animation.RELATIVE_TO_SELF, 0, Animation.RELATIVE_TO_SELF, 0,
                 Animation.RELATIVE_TO_SELF, 0.0f, Animation.RELATIVE_TO_SELF, -1.0f );
 
@@ -334,6 +352,7 @@ public class SelectMenuView extends LinearLayout {
             }
         });
     }
+
 
 
     //更行listviews
@@ -381,8 +400,7 @@ public class SelectMenuView extends LinearLayout {
                 mDelegate.onMenuViewSelect(SelectMenuView.this, section, position);
 
                 if (section+1 >= num) {
-                    mDelegate.onMenuViewFinish(SelectMenuView.this, mSelectIndexs);
-                    hideMenu();
+                    hideMenu(true);
                 }
                 else {
 

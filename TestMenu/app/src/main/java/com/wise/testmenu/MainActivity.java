@@ -85,4 +85,9 @@ public class MainActivity extends AppCompatActivity implements SelectMenuView.Se
     public void onMenuViewFinish(SelectMenuView menuView, List<Integer> selectIndexs) {
 
     }
+
+    @Override
+    public void onMenuViewCancel(SelectMenuView menuView) {
+
+    }
 }
