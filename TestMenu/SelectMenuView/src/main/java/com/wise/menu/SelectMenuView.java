@@ -131,6 +131,9 @@ public class SelectMenuView extends LinearLayout {
     //是否已经显示
     private boolean isShow = false;
 
+    //是否正在隐藏
+    private boolean isHidding = false;
+
     //文字颜色
     private int mTextColor = DEFAULT_NORMAL_TEXT_COLOR;
 
@@ -311,13 +314,17 @@ public class SelectMenuView extends LinearLayout {
     }
 
     /**
-     * 隐藏菜单
+     * 隐藏菜单，将调用onMenuViewCancel
      */
     public void hideMenu()
     {
         hideMenu(false);
     }
 
+    /**
+     * 隐藏菜单
+     * @param isFinish 是否为已完成，true将调用onMenuViewFinish；false将调用onMenuViewCancel
+     */
     public void hideMenu(boolean isFinish)
     {
         if (isFinish) {
@@ -326,6 +333,8 @@ public class SelectMenuView extends LinearLayout {
         else {
             mDelegate.onMenuViewCancel(this);
         }
+
+        isHidding = true;
 
         Animation translateAnimation = new TranslateAnimation(Animation.RELATIVE_TO_SELF, 0, Animation.RELATIVE_TO_SELF, 0,
                 Animation.RELATIVE_TO_SELF, 0.0f, Animation.RELATIVE_TO_SELF, -1.0f );
@@ -344,6 +353,7 @@ public class SelectMenuView extends LinearLayout {
             public void onAnimationEnd(Animation animation) {
                 setVisibility(GONE);
                 isShow = false;
+                isHidding = false;
             }
 
             @Override
@@ -398,6 +408,10 @@ public class SelectMenuView extends LinearLayout {
                 int num = mDelegate.onMenuViewSection(SelectMenuView.this);
 
                 mDelegate.onMenuViewSelect(SelectMenuView.this, section, position);
+
+                if (isHidding) {
+                    return;
+                }
 
                 if (section+1 >= num) {
                     hideMenu(true);

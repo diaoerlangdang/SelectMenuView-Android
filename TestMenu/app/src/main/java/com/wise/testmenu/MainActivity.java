@@ -79,6 +79,10 @@ public class MainActivity extends AppCompatActivity implements SelectMenuView.Se
 
         List<Integer> selectIndexs = menuView.getSelectIndexs();
 
+        if (section == 0 && row == 0) {
+            menuView.hideMenu();
+        }
+
     }
 
     @Override
