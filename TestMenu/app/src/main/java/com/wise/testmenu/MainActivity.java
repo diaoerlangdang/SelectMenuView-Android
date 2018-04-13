@@ -2,6 +2,7 @@ package com.wise.testmenu;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -80,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements SelectMenuView.Se
         List<Integer> selectIndexs = menuView.getSelectIndexs();
 
         if (section == 0 && row == 0) {
-            menuView.hideMenu();
+            menuView.hideMenu(true);
         }
 
     }
@@ -88,6 +89,7 @@ public class MainActivity extends AppCompatActivity implements SelectMenuView.Se
     @Override
     public void onMenuViewFinish(SelectMenuView menuView, List<Integer> selectIndexs) {
 
+        Log.d("Main", selectIndexs.toString());
     }
 
     @Override

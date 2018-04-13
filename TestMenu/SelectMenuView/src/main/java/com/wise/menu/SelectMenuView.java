@@ -387,7 +387,7 @@ public class SelectMenuView extends LinearLayout {
         mListViews.add(listView);
 
         //默认不选中
-        mSelectIndexs.add(-1);
+//        mSelectIndexs.add(-1);
 
         final MenuItemAdapter adapter = new MenuItemAdapter(mContext);
         adapter.listView = listView;
@@ -403,7 +403,13 @@ public class SelectMenuView extends LinearLayout {
                 int section = mListViews.indexOf(parent);
 
                 //修改选中列表
-                mSelectIndexs.set(section, position);
+                if (mSelectIndexs.size() <= section) {
+                    mSelectIndexs.add(position);
+                }
+                else {
+                    mSelectIndexs.set(section, position);
+                }
+
 
                 int num = mDelegate.onMenuViewSection(SelectMenuView.this);
 
@@ -441,7 +447,9 @@ public class SelectMenuView extends LinearLayout {
                             mListViews.remove(l);
                             mListViewLayout.removeView(l);
                         }
-                        mSelectIndexs.set(section+1, -1);
+                        if (mSelectIndexs.size() > section+1) {
+                            mSelectIndexs.remove(section+1);
+                        }
                     }
                 }
             }
@@ -549,7 +557,7 @@ public class SelectMenuView extends LinearLayout {
             viewHolder.separateLine.setBackgroundColor(mSeparateLineColor);
 
 
-            if (i == mSelectIndexs.get(section).intValue()) {
+            if (mSelectIndexs.size() > section && i == mSelectIndexs.get(section).intValue()) {
                 viewHolder.rootLayout.setBackgroundColor(mSelectBgColor);
                 viewHolder.textView.setTextColor(mSelectTextColor);
                 viewHolder.textView.setTextSize(mSelectTextSize);
